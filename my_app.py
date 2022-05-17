@@ -10,23 +10,23 @@ def index(request: Request) -> Response:
     return Response("Hello world!")
 
 
-def docs(request: Request) -> Response:
+def users(request: Request) -> Response:
     return Response({
         'docs': [
-            {'pk': 1, 'data': 'Doc1'}
+            {'pk': 1, 'users': ['Admin', 'Kiro']}
         ]
     })
 
 
-def doc(request: Request, pk: str) -> Response:
+def user(request: Request, pk: str) -> Response:
     if int(pk) == 1:
-        return Response({'pk': 1, 'data': 'Doc1'})
+        return Response({'pk': 1, 'user': 'Admin'})
     return Response(None, status=HTTPStatus.NOT_FOUND)
 
 
 app.get('/', index)
-app.get('/docs', docs)
-app.get(r'/docs/(\d+)', doc)
+app.get('/users', users)
+app.get(r'/users/(\d+)', user)
 
 
 class RequestLogger:
